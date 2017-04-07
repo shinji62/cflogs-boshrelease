@@ -1,0 +1,45 @@
+#!/bin/bash -e
+
+JOB_NAME=kafka-firehose-nozzle
+
+RUN_DIR=/var/vcap/sys/run/kafka-firehose-nozzle
+LOG_DIR=/var/vcap/sys/log/kafka-firehose-nozzle
+PIDFILE=${RUN_DIR}/kafka-firehose-nozzle.pid
+CONFIG_FILE=/var/vcap/jobs/kafka-firehose-nozzle/config/kafka-firehose-nozzle.toml
+
+source /var/vcap/packages/cflogs-utils/pid_utils.sh
+source /var/vcap/packages/cflogs-utils/syslog_utils.sh
+
+case $1 in
+
+start)
+
+  pid_guard ${PIDFILE} ${JOB_NAME}
+
+  SCRIPT=$(basename $0)
+
+  exec 1>> $LOG_DIR/$SCRIPT.log
+  exec 2>> $LOG_DIR/$SCRIPT.err.log
+
+  tee_output_to_sys_log "${LOG_DIR}" ${JOB_NAME}
+
+  echo $$ > ${PIDFILE}
+  
+  exec /var/vcap/packages/kafka-firehose-nozzle/bin/kafka-firehose-nozzle \
+  -log-level=<%= p('log_level')%> \
+  -stats-interval=<%= p('stats_interval')%> \
+  -config=${CONFIG_FILE}
+
+
+
+
+;;
+
+stop)
+  kill_and_wait ${PIDFILE}
+;;
+
+*)
+echo "Usage: kafka-firehose-nozzle_ctl {start|stop}" ;;
+
+esac

@@ -1,0 +1,50 @@
+---
+name: kafka-firehose-nozzle
+
+templates:
+  bin/ctl.erb: bin/ctl
+  bin/pre-start: bin/pre-start
+  config/kafka-firehose-nozzle.toml.erb: config/kafka-firehose-nozzle.toml
+
+
+packages:
+  - cflogs-utils
+  - golang1.8
+  - kafka-firehose-nozzle
+
+consumes:
+- name: conn
+  type: kafka
+  properties:
+  - port
+
+
+properties:
+  stats_interval:
+    default: "10s"
+    description: "Stat display interval time duration default (10s)"
+  log_level:
+    default: "INFO"
+    description: "Log level Default level is INFO (DEBUG|INFO|ERROR)"
+  subscription_id:
+    default: "kafka-firehose-nozzle"
+    description: ""
+  skip_ssl_validation:
+    default: true
+    description:
+  cf.doppler_address:
+    default: "wss://doppler.local.pcfdev.io:443"
+    description: "Firehose endpoint"
+  cf.uaa_address:
+    default: "https://uaa.local.pcfdev.io"
+    description: "Authorization server address"
+  cf.client_id:
+    description: "Client Id use to connect to the nozzle should have doppler.firehose right"
+  cf.client_secret:
+    description: "Client secret use to connect to the nozzle"
+  kafka.retry_max:
+    default:  10
+    description: "Producer retry logic. Default 10"
+  kafka.retry_backoff:
+    default: 500
+    description: "Producer Retry backoff in millisecond. Default 500ms"

@@ -1,0 +1,50 @@
+---
+name: kafka
+
+packages:
+  - kafka
+  - java
+
+templates:
+  bin/kafka_ctl: bin/ctl
+  config/log4j.properties.erb: config/log4j.properties
+  config/server.properties.erb: config/server.properties
+
+consumes:
+- name: conn
+  type: zookeeper
+  properties:
+  - client_port
+
+provides:
+- name: conn
+  type: kafka
+  properties:
+  - port
+
+
+properties:
+  port:
+    description: The port the socket server listens on
+    default: 9092
+  index_offset:
+    description: "Offset value to add to the spec.index"
+    default: 0
+  log_dirs:
+    description: Directory under which to store log files
+    default: /var/vcap/store/kafka
+  log_flush_interval_ms:
+    description: The maximum amount of time a message can sit in a log before we force a flush
+    default: 1000
+  log_retention_hours:
+    description: The minimum age of a log file to be eligible for deletion
+    default: 168
+  auto_create_topics_enable:
+    description: Enable auto creation of topic on the server
+    default: true
+  delete_topic_enable:
+    description: Enable delete topic
+    default: false
+  num_network_threads:
+    description: The number of threads handling network requests
+    default: 3

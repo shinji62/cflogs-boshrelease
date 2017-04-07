@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+set -e -u
+
+RUN_DIR=/var/vcap/sys/run/kafka-manager
+LOG_DIR=/var/vcap/sys/log/kafka-manager
+TMP_DIR=/var/vcap/sys/tmp/kafka-manager
+JOB_DIR=/var/vcap/jobs/kafka-manager
+STORE_DIR=/var/vcap/store/kafka-manager
+
+mkdir -p ${RUN_DIR} ${LOG_DIR} ${TMP_DIR} ${STORE_DIR}
+
+PIDFILE=${RUN_DIR}/kafka.pid
+
+export LANG=en_US.UTF-8
+
+case $1 in
+    start)
+        echo $$ > $PIDFILE
+        exec /var/vcap/packages/kafka-manager/kafka-manager   \
+             -Dconfig.file=${JOB_DIR}/config/application.conf -Dhttp.port=<%= p("port") %> \
+          >>  ${LOG_DIR}/kafka_manager.stdout.log \
+          2>> ${LOG_DIR}/kafka_manager.stderr.log
+        ;;
+    stop)
+       if [ -f $PIDFILE ]; then
+         kill -9 `cat $PIDFILE` || true
+         rm -f $PIDFILE
+       fi
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    status)
+       pid=$(kafka_manager_pid)
+        if [ -n "$pid" ]
+        then
+           echo "Kafka Manager is running with pid: $pid"
+        else
+           echo "Kafka Manager is not running"
+        fi
+        ;;
+    *)
+        echo $"Usage: $NAME {start|stop|restart|status}"
+esac
+
+exit 0

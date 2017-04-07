@@ -1,0 +1,42 @@
+# This is example toml file to configure 'firehose-kafka-nozzle'.
+# You can edit this file for your environment.
+
+# All data will be ddistributed to nozzle with same subscription ID.
+# https://github.com/cloudfoundry/loggregator#consuming-log-and-metric-data
+subscription_id = "<%= p('subscription_id') %>"
+
+#Allow Insecure SSL cert like self signed and so on
+insecure_ssl_skip_verify= <%= p('skip_ssl_validation') %>
+
+[cf]
+# Endpoint where nozzle consumes logs
+doppler_address = "<%= p('cf.doppler_address') %>"
+
+# To access to the firehoze and consume logs from there,
+# you need an access token for that.
+#
+# You can just set it at `token` property in this file.
+# Or you can provide uaa endpoint and username/password.
+# It automatically grants token before connecting.
+
+# Endpoint where nozzle fetches the access token
+# to read the firehose messages.
+uaa_address = "<%= p('cf.uaa_address') %>"
+
+# username & password to fetch the firehose access token
+username = "<%= p('cf.client_id') %>"
+password = "<%= p('cf.client_secret') %>"
+
+[kafka]
+#The list of kafka brokers IP
+<%
+  kafkabrokers_ip = link("conn").instances.map do |instance|
+    "\"#{instance.address}:#{link("conn").p('port')}\""
+  end.join(',')
+%>
+brokers = [<%=kafkabrokers_ip%>]
+
+
+# The producer retry logic
+retry_max = <%= p('kafka.retry_max') %>
+retry_backoff_ms = <%= p('kafka.retry_backoff') %>

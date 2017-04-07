@@ -1,0 +1,12 @@
+golang/go1.8.linux-amd64.tar.gz:
+  size: 89803580
+  sha: a93fe8fc245e3554f956bc823f30ef4eb23c2068
+java/openjdk-1.8.0_121.tar.gz:
+  size: 45476711
+  sha: d1596c9c825cb3f5be373bd34e4f6520187b9660
+kafka-manager/kafka-manager_1.3.3.1.tar.gz:
+  size: 949202
+  sha: 96c76cafe1d427ea6b69fd4b86f54e515029fff5
+kafka/kafka_2.12-0.10.2.0.tgz:
+  size: 34021573
+  sha: 655a4b415b0913117ebff88888ea526a3c2a4a06

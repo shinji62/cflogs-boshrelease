@@ -1,0 +1,44 @@
+
+# Copyright 2015 Yahoo Inc. Licensed under the Apache License, Version 2.0
+# See accompanying LICENSE file.
+
+# This is the main configuration file for the application.
+# ~~~~~
+
+# Secret key
+# ~~~~~
+# The secret key is used to secure cryptographics functions.
+play.crypto.secret=<%=p('crypto_secret')%>
+
+# The application languages
+# ~~~~~
+play.i18n.langs=["en"]
+
+play.http.requestHandler = "play.http.DefaultHttpRequestHandler"
+play.http.context = "/"
+play.application.loader=loader.KafkaManagerLoader
+
+
+<%
+  zookeeper_endpoints = link("conn").instances.map do |instance|
+    "#{instance.address}:#{link("conn").p('client_port')}"
+  end.join(',')
+%>
+kafka-manager.zkhosts=<%=zookeeper_endpoints%>
+pinned-dispatcher.type="PinnedDispatcher"
+pinned-dispatcher.executor="thread-pool-executor"
+application.features=["KMClusterManagerFeature","KMTopicManagerFeature","KMPreferredReplicaElectionFeature","KMReassignPartitionsFeature"]
+
+akka {
+  loggers = ["akka.event.slf4j.Slf4jLogger"]
+  loglevel = "INFO"
+}
+
+
+basicAuthentication.enabled=false
+basicAuthentication.username="admin"
+basicAuthentication.password="password"
+basicAuthentication.realm="Kafka-Manager"
+
+
+kafka-manager.consumer.properties.file=/var/vcap/jobs/kafka-manager/config/consumer.properties

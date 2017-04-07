@@ -1,0 +1,76 @@
+---
+name: cflogs-boshlite
+
+releases:
+- name: cflogs
+  version: latest
+- name: zookeeper
+  version: latest
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+update:
+  canaries: 1
+  max_in_flight: 10
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+
+instance_groups:
+- name: zookeeper
+  instances: 3
+  azs: [default]
+  jobs:
+  - name: zookeeper
+    release: zookeeper
+    provides:
+      peers: {as: peers}
+    properties:
+      max_client_connections: 200
+  vm_type: default
+  stemcell: default
+  persistent_disk: 2048
+  networks:
+  - name: default
+
+- name: kafka
+  instances: 3
+  azs: [default]
+  jobs:
+  - name: kafka
+    release: cflogs
+  vm_type: default
+  stemcell: default
+  persistent_disk: 2048
+  networks:
+  - name: default
+
+- name: kafka-nozzle
+  instances: 1
+  azs: [default]
+  jobs:
+  - name: kafka-firehose-nozzle
+    release: cflogs
+    properties:
+      cf:
+        client_id: "firehose-to-syslog"
+        client_secret: "firehose-to-syslog-secret"
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
+
+
+
+# - name: kafka-manager
+#   instances: 1
+#   azs: [default]
+#   jobs:
+#   - name: kafka-manager
+#     release: cflogs
+#   vm_type: default
+#   stemcell: default
+#   networks:
+#   - name: default

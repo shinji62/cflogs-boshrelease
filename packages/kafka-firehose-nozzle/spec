@@ -1,0 +1,8 @@
+---
+name: kafka-firehose-nozzle
+
+dependencies:
+- golang1.8
+
+files:
+- kafka-firehose-nozzle/src/github.com/shinji62/**/*

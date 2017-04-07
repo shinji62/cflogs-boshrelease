@@ -1,0 +1,7 @@
+check process kafka-firehose-nozzle
+  with pidfile /var/vcap/sys/run/kafka-firehose-nozzle/kafka-firehose-nozzle.pid
+  start program "/var/vcap/jobs/kafka-firehose-nozzle/bin/ctl start"
+    as uid vcap and gid vcap with timeout 60 seconds
+  stop program "/var/vcap/jobs/kafka-firehose-nozzle/bin/ctl stop"
+    as uid vcap and gid vcap
+  group vcap

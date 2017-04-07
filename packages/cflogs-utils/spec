@@ -1,0 +1,6 @@
+---
+name: cflogs-utils
+
+files:
+  - cflogs-utils/pid_utils.sh
+  - cflogs-utils/syslog_utils.sh

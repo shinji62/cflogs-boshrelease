@@ -1,0 +1,7 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+export HOME=/var/vcap
+
+tar xf kafka/kafka_2.12-0.10.2.0.tgz
+cp -a kafka_2.12-0.10.2.0/* $BOSH_INSTALL_TARGET

@@ -1,0 +1,8 @@
+---
+name: kafka-manager
+
+dependencies:
+  - java
+
+files:
+  - kafka-manager/kafka-manager_1.3.3.1.tar.gz

@@ -17,23 +17,38 @@ So the idea is to use something fast enough to consumes the firehose stream with
 Using Kafka, we can easily consume the firehose stream and we can use as much consumer as we want on the same kafka deployment.
 
 
-
+![cflogs Overview](docs/Kafka-Nozzle.svg)
 
 Component
 ---------
 
-kafka-firehose-nozzle (Fork from )
-kafka  
-Zookeeper  ()
+#### kafka-firehose-nozzle
+Simply forward message from the firehose to kafka.
+For topics and partition information please go directly to the Github  [repository](https://github.com/shinji62/kafka-firehose-nozzle).
+
+For now we install the nozzle on VM
 
 
+### Kafka  
+Well Kafka....
+Included in this bosh release Kafka v0.10.2.0
+
+
+### Zookeeper
+Well Zookeeper
+Not Include in this bosh release we use [Zookeeper-relesse](https://bosh.io/d/github.com/cppforlife/zookeeper-release)
 
 
 Usage
 -----
 
-To use this bosh release, first upload it to your bosh:
+First upload zookeeper-release if you don't have it
 
+```bash
+$ bosh upload release https://bosh.io/d/github.com/cppforlife/zookeeper-release
 ```
-bosh upload release https://github.com/shinji62/cflogs-boshrelease
+
+Then upload this bosh releasecd
+```bash
+$ bosh upload release https://github.com/shinji62/cflogs-boshrelease
 ```

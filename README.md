@@ -17,7 +17,7 @@ So the idea is to use something fast enough to consumes the firehose stream with
 Using Kafka, we can easily consume the firehose stream and we can use as much consumer as we want on the same kafka deployment.
 
 
-![cflogs Overview](docs/Kafka-Nozzle.svg)
+![cflogs Overview](https://cdn.rawgit.com/shinji62/cflogs-boshrelease/30b06d33/docs/Kafka-Nozzle.svg)
 
 Component
 ---------
@@ -36,7 +36,7 @@ Included in this bosh release Kafka v0.10.2.0
 
 ### Zookeeper
 Well Zookeeper
-Not Include in this bosh release we use [Zookeeper-relesse](https://bosh.io/d/github.com/cppforlife/zookeeper-release)
+Not Include in this bosh release we use [Zookeeper-release](https://bosh.io/d/github.com/cppforlife/zookeeper-release)
 
 
 Usage

@@ -48,3 +48,21 @@ properties:
   num_network_threads:
     description: The number of threads handling network requests
     default: 3
+  num_io_threads:
+    description: "The number of threads doing disk I/O"
+    default: 8
+  socket_send_buffer_bytes:
+    description: "The send buffer (SO_SNDBUF) used by the socket server"
+    default: 102400
+  socket_receive_buffer_bytes:
+    description: "The receive buffer (SO_RCVBUF) used by the socket server"
+    default: 102400
+  socket_request_max_bytes: "The maximum size of a request that the socket server will accept (protection against OOM)"
+    description:
+    default: 104857600
+  num_partitions:
+    description: "The default number of log partitions per topic."
+    default: 1
+  zookeeper_connection_timeout_ms:
+    description: "Timeout in ms for connecting to zookeeper"
+    default: 6000

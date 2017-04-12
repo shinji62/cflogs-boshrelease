@@ -41,16 +41,16 @@ advertised.host.name=<%= spec.networks.marshal_dump.first[1].ip %>
 num.network.threads=<%= p("num_network_threads") %>
 
 # The number of threads doing disk I/O
-num.io.threads=8
+num.io.threads=<%= p("num_io_threads")%>
 
 # The send buffer (SO_SNDBUF) used by the socket server
-socket.send.buffer.bytes=102400
+socket.send.buffer.bytes=<%= p("socket_send_buffer_bytes")%>
 
 # The receive buffer (SO_RCVBUF) used by the socket server
-socket.receive.buffer.bytes=102400
+socket.receive.buffer.bytes=<%= p("socket_receive_buffer_bytes")%>
 
 # The maximum size of a request that the socket server will accept (protection against OOM)
-socket.request.max.bytes=104857600
+socket.request.max.bytes=<%= p("socket_request_max_bytes")%>
 
 
 ############################# Log Basics #############################
@@ -61,7 +61,7 @@ log.dirs=/var/vcap/store/kafka/
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
 # the brokers.
-num.partitions=1
+num.partitions=<%= p("num_partitions")%>
 
 # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
 # This value is recommended to be increased for installations with data dirs located in RAID array.
@@ -130,4 +130,4 @@ delete.topic.enable=<%= p("delete_topic_enable") %>
 zookeeper.connect=<%=zookeeper_endpoints%>
 
 # Timeout in ms for connecting to zookeeper
-zookeeper.connection.timeout.ms=6000
+zookeeper.connection.timeout.ms=<%= p("zookeeper_connection_timeout_ms") %>

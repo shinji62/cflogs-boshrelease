@@ -19,6 +19,27 @@ Using Kafka, we can easily consume the firehose stream and we can use as much co
 
 ![cflogs Overview](./docs/Kafka-Nozzle.png)
 
+
+Each Event Type message crate a topics so as today :
+
+LogMessage
+Counter
+..
+..
+..
+
+
+
+Consuming from Kafka
+--------------------
+
+If you have already some Nozzle the change should not be big as we can reuse you can find an example with [cf-kafka-to-syslog](https://github.com/shinji62/cf-kafka-to-syslog).
+
+
+
+
+
+
 Component
 ---------
 
@@ -50,7 +71,28 @@ First upload zookeeper-release if you don't have it
 $ bosh upload release https://bosh.io/d/github.com/cppforlife/zookeeper-release
 ```
 
-Then upload this bosh releasecd
+Then upload this bosh release
+
 ```bash
 $ bosh upload release https://github.com/shinji62/cflogs-boshrelease
 ```
+
+Please check the deployment sample manifest [templates/bosh-lite.yml](./templates/bosh-lite.yml)
+
+
+Then just deployment
+
+```
+//Bosh-old-cli
+bosh deploy
+
+//Bosh cli v2
+bosh2 deploy -e yourenv -d cflogs-boshlite ./templates/bosh-lite.yml -n 
+```
+
+
+
+TODO
+====
+* Test test and test
+* Concourse Pipeline

@@ -57,8 +57,8 @@ properties:
   socket_receive_buffer_bytes:
     description: "The receive buffer (SO_RCVBUF) used by the socket server"
     default: 102400
-  socket_request_max_bytes: "The maximum size of a request that the socket server will accept (protection against OOM)"
-    description:
+  socket_request_max_bytes:
+    description: "The maximum size of a request that the socket server will accept (protection against OOM)"
     default: 104857600
   num_partitions:
     description: "The default number of log partitions per topic."

@@ -40,3 +40,12 @@ brokers = [<%=kafkabrokers_ip%>]
 # The producer retry logic
 retry_max = <%= p('kafka.retry_max') %>
 retry_backoff_ms = <%= p('kafka.retry_backoff') %>
+
+  [kafka.topic]
+    [kafka.topic.relabel]
+    <% if_p('kafka.topic.relabel.log-message') do |prop| %>log_message = "<%=prop%>"<%end%>
+    <% if_p('kafka.topic.relabel.container-metric') do |prop| %> %>container_metric= "<%=prop%>"<%end%>
+    <% if_p('kafka.topic.relabel.value-metric') do |prop| %>%>value_metric= "<%=prop%>"<%end%>
+    <% if_p('kafka.topic.relabel.counter-event') do |prop| %> %>counter_event= "<%=prop%>"<%end%>
+    <% if_p('kafka.topic.relabel.http-start-stop') do |prop| %>%>http_start_stop= "<%=prop%>"<%end%>
+    <% if_p('kafka.topic.relabel.error') do |prop| %> %>error= "<%=prop%>"<%end%>

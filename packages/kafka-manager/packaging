@@ -5,10 +5,7 @@ export HOME=/var/vcap/packages/kafka-manager/
 export JAVA_HOME=/var/vcap/packages/java
 export PATH=$JAVA_HOME/bin:$PATH
 
-tar xfv kafka-manager/kafka-manager_1.3.3.1.tar.gz
-pushd kafka-manager-1.3.3.1
-
-  echo 'scalacOptions ++= Seq("-Xmax-classfile-name", "200")' >> build.sbt
-  ./sbt clean dist
-  unzip  -d / ./target/universal/kafka-manager-${KM_VERSION}.zip $BOSH_INSTALL_TARGET
+unzip kafka-manager/kafka-manager-1.3.3.4.zip
+pushd kafka-manager-1.3.3.4
+    cp -Ra * $BOSH_INSTALL_TARGET/
 popd

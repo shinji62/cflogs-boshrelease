@@ -4,6 +4,9 @@ golang/go1.8.linux-amd64.tar.gz:
 java/openjdk-1.8.0_121.tar.gz:
   size: 45476711
   sha: d1596c9c825cb3f5be373bd34e4f6520187b9660
+kafka-manager/kafka-manager-1.3.3.4.zip:
+  size: 60545592
+  sha: d707b37688892f4ab96b6843e4b85ca2935306b8
 kafka-manager/kafka-manager_1.3.3.1.tar.gz:
   size: 949202
   sha: 96c76cafe1d427ea6b69fd4b86f54e515029fff5

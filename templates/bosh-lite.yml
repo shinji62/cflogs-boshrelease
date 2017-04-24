@@ -48,7 +48,7 @@ instance_groups:
   - name: default
 
 - name: kafka-nozzle
-  instances: 1
+  instances: 2
   azs: [default]
   jobs:
   - name: kafka-firehose-nozzle
@@ -57,6 +57,10 @@ instance_groups:
       cf:
         client_id: "firehose-to-syslog"
         client_secret: "firehose-to-syslog-secret"
+      kafka:
+        topic:
+          relabel:
+            log-message: log
   vm_type: default
   stemcell: default
   networks:

@@ -5,4 +5,4 @@ dependencies:
   - java
 
 files:
-  - kafka-manager/kafka-manager_1.3.3.1.tar.gz
+  - kafka-manager/kafka-manager-1.3.3.4.zip

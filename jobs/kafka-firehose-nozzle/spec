@@ -48,3 +48,15 @@ properties:
   kafka.retry_backoff:
     default: 500
     description: "Producer Retry backoff in millisecond. Default 500ms"
+  kafka.topic.relabel.log-message:
+    description: "Changing topic name (default LogMessage)"
+  kafka.topic.relabel.container-metric:
+    description: "Changing topic name (default ContainerMetric)"
+  kafka.topic.relabel.value-metric:
+    description: "Changing topic name (default ValueMetric)"
+  kafka.topic.relabel.counter-event:
+    description: "Changing topic name (default CounterEvent)"
+  kafka.topic.relabel.http-start-stop:
+    description: "Changing topic name (default HttpStartStop)"
+  kafka.topic.relabel.error:
+    description: "Changing topic name (default Error)"

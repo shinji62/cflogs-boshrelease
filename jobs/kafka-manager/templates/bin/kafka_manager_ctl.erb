@@ -10,6 +10,9 @@ LOG_DIR=/var/vcap/sys/log/kafka-manager
 TMP_DIR=/var/vcap/sys/tmp/kafka-manager
 JOB_DIR=/var/vcap/jobs/kafka-manager
 STORE_DIR=/var/vcap/store/kafka-manager
+JAVA_HOME=/var/vcap/packages/java
+PATH=$JAVA_HOME/bin:$PATH
+
 
 mkdir -p ${RUN_DIR} ${LOG_DIR} ${TMP_DIR} ${STORE_DIR}
 
@@ -20,8 +23,10 @@ export LANG=en_US.UTF-8
 case $1 in
     start)
         echo $$ > $PIDFILE
-        exec /var/vcap/packages/kafka-manager/kafka-manager   \
-             -Dconfig.file=${JOB_DIR}/config/application.conf -Dhttp.port=<%= p("port") %> \
+        exec /var/vcap/packages/kafka-manager/bin/kafka-manager   \
+             -Dconfig.file=${JOB_DIR}/config/application.conf \
+             -Dhttp.port=<%= p("port") %> \
+             -Dpidfile.path=${PIDFILE} \
           >>  ${LOG_DIR}/kafka_manager.stdout.log \
           2>> ${LOG_DIR}/kafka_manager.stderr.log
         ;;
@@ -36,13 +41,6 @@ case $1 in
         start
         ;;
     status)
-       pid=$(kafka_manager_pid)
-        if [ -n "$pid" ]
-        then
-           echo "Kafka Manager is running with pid: $pid"
-        else
-           echo "Kafka Manager is not running"
-        fi
         ;;
     *)
         echo $"Usage: $NAME {start|stop|restart|status}"

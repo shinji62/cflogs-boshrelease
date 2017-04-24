@@ -6,7 +6,7 @@ packages:
   - java
 
 templates:
-  bin/kafka_ctl: bin/ctl
+  bin/kafka_ctl.erb: bin/ctl
   config/log4j.properties.erb: config/log4j.properties
   config/server.properties.erb: config/server.properties
 

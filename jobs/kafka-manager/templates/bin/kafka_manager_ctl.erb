@@ -22,7 +22,6 @@ export LANG=en_US.UTF-8
 
 case $1 in
     start)
-        echo $$ > $PIDFILE
         exec /var/vcap/packages/kafka-manager/bin/kafka-manager   \
              -Dconfig.file=${JOB_DIR}/config/application.conf \
              -Dhttp.port=<%= p("port") %> \

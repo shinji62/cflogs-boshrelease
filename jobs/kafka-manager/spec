@@ -8,7 +8,7 @@ packages:
 templates:
   bin/kafka_manager_ctl.erb: bin/ctl
   config/consumer.properties.erb: config/consumer.properties
-  config/application.conf.erb: config/application.erb
+  config/application.conf.erb: config/application.conf
 
 consumes:
 - name: conn

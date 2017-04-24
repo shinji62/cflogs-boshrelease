@@ -25,6 +25,7 @@ PIDFILE=${RUN_DIR}/kafka.pid
 
 export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:${JOB_DIR}/config/log4j.properties"
 export LANG=en_US.UTF-8
+export JMX_PORT=<%= p("jmx_port") %>
 
 case $1 in
   start)

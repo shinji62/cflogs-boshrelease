@@ -8,7 +8,7 @@
 # Secret key
 # ~~~~~
 # The secret key is used to secure cryptographics functions.
-play.crypto.secret=<%=p('crypto_secret')%>
+play.crypto.secret="<%=p('crypto_secret')%>"
 
 # The application languages
 # ~~~~~
@@ -24,7 +24,7 @@ play.application.loader=loader.KafkaManagerLoader
     "#{instance.address}:#{link("conn").p('client_port')}"
   end.join(',')
 %>
-kafka-manager.zkhosts=<%=zookeeper_endpoints%>
+kafka-manager.zkhosts="<%=zookeeper_endpoints%>"
 pinned-dispatcher.type="PinnedDispatcher"
 pinned-dispatcher.executor="thread-pool-executor"
 application.features=["KMClusterManagerFeature","KMTopicManagerFeature","KMPreferredReplicaElectionFeature","KMReassignPartitionsFeature"]

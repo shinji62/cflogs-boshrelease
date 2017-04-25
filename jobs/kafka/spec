@@ -6,7 +6,7 @@ packages:
   - java
 
 templates:
-  bin/kafka_ctl: bin/ctl
+  bin/kafka_ctl.erb: bin/ctl
   config/log4j.properties.erb: config/log4j.properties
   config/server.properties.erb: config/server.properties
 
@@ -27,6 +27,9 @@ properties:
   port:
     description: The port the socket server listens on
     default: 9092
+  jmx_port:
+    description: The port to collect Kafka JMX metrics
+    default: 9999
   index_offset:
     description: "Offset value to add to the spec.index"
     default: 0

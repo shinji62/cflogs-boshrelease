@@ -1,0 +1,55 @@
+name: cflogs
+version: "3"
+commit_hash: cea17a7
+uncommitted_changes: false
+jobs:
+- name: kafka
+  version: bf03832cfb4fa9050e855ec070dff7c5f6ee79f9
+  fingerprint: bf03832cfb4fa9050e855ec070dff7c5f6ee79f9
+  sha1: bc391ada12132405c6a2fb525c288b29eeff4907
+- name: kafka-firehose-nozzle
+  version: e2ce73796cf9a83d6e1d734c5f829ef2b7b72095
+  fingerprint: e2ce73796cf9a83d6e1d734c5f829ef2b7b72095
+  sha1: 1df2d8756afc8e50b5b5c5f459f797d032f7331c
+- name: kafka-manager
+  version: a614f40b190ad6535891f164c61b68e499a8bfba
+  fingerprint: a614f40b190ad6535891f164c61b68e499a8bfba
+  sha1: 3c2b0dc4889f5754eb136bce930b34c10e52aca5
+packages:
+- name: cflogs-utils
+  version: 2af55f5e5467b92caba4ddda2196c19124e39150
+  fingerprint: 2af55f5e5467b92caba4ddda2196c19124e39150
+  sha1: b086d6d3de2076f0ec5f30608afd2150330bf45f
+  dependencies: []
+- name: golang1.8
+  version: 1b3258a9240089c2b56210b287a24b051dda479e
+  fingerprint: 1b3258a9240089c2b56210b287a24b051dda479e
+  sha1: 6810653e1790387c09a400d9be0db31f8af851bd
+  dependencies: []
+- name: java
+  version: d9df98002d0edc73a54aeecb9d1c9bc3c241f8dc
+  fingerprint: d9df98002d0edc73a54aeecb9d1c9bc3c241f8dc
+  sha1: 671dba9d4e5755a4f46e7d76840a7d82028bec27
+  dependencies: []
+- name: kafka
+  version: 1dfd988925d551b5a24c04de5ae327978eb595c6
+  fingerprint: 1dfd988925d551b5a24c04de5ae327978eb595c6
+  sha1: d83284dbe8ab9c6d3e72c90d62d6c3b37784d265
+  dependencies:
+  - java
+- name: kafka-firehose-nozzle
+  version: 9e0cfd7fff749bcae7c44e00e848446315f928cb
+  fingerprint: 9e0cfd7fff749bcae7c44e00e848446315f928cb
+  sha1: dffa46a755413649b3407d1c37d987e3dd727a69
+  dependencies:
+  - golang1.8
+- name: kafka-manager
+  version: b422930a78937948178b7b74c0d0ab7012ded9f1
+  fingerprint: b422930a78937948178b7b74c0d0ab7012ded9f1
+  sha1: 84ee299330f0314fe58c2780399562a985295459
+  dependencies:
+  - java
+license:
+  version: 569a481663f95b10cb803539ba61a8c24a881463
+  fingerprint: 569a481663f95b10cb803539ba61a8c24a881463
+  sha1: d9444c4d95b9d40093d6ed25239132196e6de019

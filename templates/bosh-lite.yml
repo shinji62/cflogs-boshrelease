@@ -68,13 +68,13 @@ instance_groups:
 
 
 
-# - name: kafka-manager
-#   instances: 1
-#   azs: [default]
-#   jobs:
-#   - name: kafka-manager
-#     release: cflogs
-#   vm_type: default
-#   stemcell: default
-#   networks:
-#   - name: default
+- name: kafka-manager
+  instances: 1
+  azs: [default]
+  jobs:
+  - name: kafka-manager
+    release: cflogs
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default

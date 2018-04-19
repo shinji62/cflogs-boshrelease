@@ -9,14 +9,13 @@ templates:
 
 packages:
   - cflogs-utils
-  - golang1.8
   - kafka-firehose-nozzle
 
 consumes:
-- name: conn
-  type: kafka
+- name: kafka
+  type: conn
   properties:
-  - port
+  - listen_port
 
 
 properties:
@@ -48,15 +47,24 @@ properties:
   kafka.retry_backoff:
     default: 500
     description: "Producer Retry backoff in millisecond. Default 500ms"
-  kafka.topic.relabel.log-message:
+  kafka.compression:
+    default: none
+    description: "Message Compression (none, snappy, gzip)"
+  kafka.topic.log-message:
+    default: "LogMessage"
     description: "Changing topic name (default LogMessage)"
-  kafka.topic.relabel.container-metric:
+  kafka.topic.container-metric:
+    default: "ContainerMetric"
     description: "Changing topic name (default ContainerMetric)"
-  kafka.topic.relabel.value-metric:
+  kafka.topic.value-metric:
+    default: "ValueMetric"
     description: "Changing topic name (default ValueMetric)"
-  kafka.topic.relabel.counter-event:
+  kafka.topic.counter-event:
+    default: CounterEvent
     description: "Changing topic name (default CounterEvent)"
-  kafka.topic.relabel.http-start-stop:
+  kafka.topic.http-start-stop:
+    default: "HttpStartStop"
     description: "Changing topic name (default HttpStartStop)"
-  kafka.topic.relabel.error:
+  kafka.topic.error:
+    default: "Error"
     description: "Changing topic name (default Error)"

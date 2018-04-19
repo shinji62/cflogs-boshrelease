@@ -1,9 +1,12 @@
 set -e -x
 
-export GOROOT=$(readlink -nf /var/vcap/packages/golang1.8)
-export PATH=$GOROOT/bin:$PATH
+#!/bin/bash
+
+set -eux
+
+source /var/vcap/packages/golang-1.9-linux/bosh/compile.env
+
 export GOPATH=$PWD/kafka-firehose-nozzle
-ls -lah $GOROOT/
-cd $GOPATH/src/github.com/shinji62/kafka-firehose-nozzle
+cd $GOPATH/src/github.com/rakutentech/kafka-firehose-nozzle
 
 go build -o ${BOSH_INSTALL_TARGET}/bin/kafka-firehose-nozzle

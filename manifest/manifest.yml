@@ -1,0 +1,102 @@
+---
+name: ((deployment_name))
+
+releases:
+- name: cflogs
+  version: ((cflogs_version))
+  url: git+https://github.com/github.com/concourse/concourse?v=((concourse_version))
+- name: kafka
+  version: ((kafka_version))
+  sha1: ((kafka_sha1))
+  url: http://bosh.io/releases/github.com/cloudfoundry-community/kafka-boshrelease?v=((kafka_version))
+- name: zookeeper
+  version: ((zookeeper_version))
+  url: git+https://github.com/cppforlife/zookeeper-release
+- name: bpm
+  version: ((bpm_version))
+  url: git+https://github.com/cloudfoundry-incubator/bpm-release
+
+instance_groups:
+- name: kafka
+  azs: [z1, z2, z3]
+  instances: 3
+  vm_type: default
+  stemcell: default
+  persistent_disk: ((kafka_persistent_disk))
+  networks: [{name: default}]
+  jobs:
+  - name: kafka
+    release: kafka
+    properties: {}
+
+
+- name: zookeeper
+  azs: [z1,z2,z3]
+  instances: 3
+  jobs:
+  - name: zookeeper
+    release: zookeeper
+    properties: {}
+  - name: status
+    release: zookeeper
+    properties: {}
+  vm_type: default
+  stemcell: default
+  persistent_disk: ((zookeeper_persitent_disk))
+  networks: [{name: default}]
+
+
+- name: sanity-test
+  azs: [z1, z2, z3]
+  instances: 1
+  lifecycle: errand
+  vm_type: default
+  stemcell: default
+  networks: [{name: default}]
+  jobs:
+  - name: sanity-test
+    release: kafka
+
+
+- name: kafka-nozzle
+  instances: 1
+  azs: [z1,z2,z3]
+  networks: [{name: default}]
+  stemcell: default
+  vm_type: default
+  jobs:
+  - release: cflogs
+    name: kafka-firehose-nozzle
+    properties:
+      subscription_id: ((subscription_id))
+      cf:
+        doppler_address: ((doppler_address))
+        uaa_address: ((uaa_address))
+        client_id: ((nozzle_client_id))
+        client_secret: ((nozzle_client_secret))
+
+
+
+addons:
+- name: bpm
+  jobs:
+  - name: bpm
+    release: bpm
+
+variables:
+- name: kafka-manager-password
+  type: password
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+
+
+update:
+  canaries: 1
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
+  max_in_flight: 1
+  serial: true

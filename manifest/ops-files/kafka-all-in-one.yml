@@ -1,0 +1,31 @@
+
+# Removing other instance groups
+- type: remove
+  path: /instance_groups/name=zookeeper
+- type: remove
+  path: /instance_groups/name=kafka-manager?
+
+
+#Remove
+- type: replace
+  path: /instance_groups/name=kafka?
+  value:
+    name: kafka
+    azs: [z1, z2, z3]
+    instances: 3
+    vm_type: default
+    stemcell: default
+    persistent_disk: ((kafka_persistent_disk))
+    networks: [{name: default}]
+    jobs:
+    - name: zookeeper
+      release: zookeeper
+      properties: {}
+    - name: kafka
+      release: kafka
+      properties: {}
+    - name: kafka-manager
+      release: kafka
+      properties:
+        username: admin
+        password: ((kafka-manager-password))

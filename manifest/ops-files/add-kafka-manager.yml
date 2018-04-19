@@ -1,0 +1,16 @@
+
+- type: replace
+  path: /instance_groups/name=kafka-manager?
+  value:
+    name: kafka-manager
+    azs: [z1, z2, z3]
+    instances: 3
+    vm_type: default
+    stemcell: default
+    networks: [{name: default}]
+    jobs:
+    - name: kafka-manager
+      release: kafka
+      properties:
+        username: admin
+        password: ((kafka-manager-password))

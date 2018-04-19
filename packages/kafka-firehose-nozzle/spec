@@ -2,7 +2,7 @@
 name: kafka-firehose-nozzle
 
 dependencies:
-- golang1.8
+- golang-1.9-linux
 
 files:
-- kafka-firehose-nozzle/src/github.com/shinji62/**/*
+- kafka-firehose-nozzle/src/github.com/rakutentech/**/*

@@ -1,0 +1,3 @@
+[submodule "src/kafka-firehose-nozzle/src/github.com/rakutentech/kafka-firehose-nozzle"]
+	path = src/kafka-firehose-nozzle/src/github.com/rakutentech/kafka-firehose-nozzle
+	url = git@github.com:rakutentech/kafka-firehose-nozzle.git

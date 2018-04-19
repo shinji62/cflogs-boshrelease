@@ -30,8 +30,8 @@ password = "<%= p('cf.client_secret') %>"
 [kafka]
 #The list of kafka brokers IP
 <%
-  kafkabrokers_ip = link("conn").instances.map do |instance|
-    "\"#{instance.address}:#{link("conn").p('port')}\""
+  kafkabrokers_ip = link("kafka").instances.map do |instance|
+    "\"#{instance.address}:#{link("kafka").p('listen_port')}\""
   end.join(',')
 %>
 brokers = [<%=kafkabrokers_ip%>]
@@ -41,11 +41,14 @@ brokers = [<%=kafkabrokers_ip%>]
 retry_max = <%= p('kafka.retry_max') %>
 retry_backoff_ms = <%= p('kafka.retry_backoff') %>
 
+
+# Message compression "none" or "snappy", "gzip"
+compression = "<%= p('kafka.compression') %>"
+
   [kafka.topic]
-    [kafka.topic.relabel]
-    <% if_p('kafka.topic.relabel.log-message') do |prop| %>log_message = "<%=prop%>"<%end%>
-    <% if_p('kafka.topic.relabel.container-metric') do |prop| %> %>container_metric= "<%=prop%>"<%end%>
-    <% if_p('kafka.topic.relabel.value-metric') do |prop| %>%>value_metric= "<%=prop%>"<%end%>
-    <% if_p('kafka.topic.relabel.counter-event') do |prop| %> %>counter_event= "<%=prop%>"<%end%>
-    <% if_p('kafka.topic.relabel.http-start-stop') do |prop| %>%>http_start_stop= "<%=prop%>"<%end%>
-    <% if_p('kafka.topic.relabel.error') do |prop| %> %>error= "<%=prop%>"<%end%>
+    log_message = "<%= p('kafka.topic.log-message') %>"
+    value_metric = "<%= p('kafka.topic.value-metric') %>"
+    container_metric = "<%= p('kafka.topic.container-metric') %>"
+    http_start_stop = "<%= p('kafka.topic.http-start-stop') %>"
+    counter_event = "<%= p('kafka.topic.counter-event') %>"
+    error = "<%= p('kafka.topic.error') %>"

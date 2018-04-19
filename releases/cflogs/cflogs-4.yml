@@ -1,0 +1,30 @@
+name: cflogs
+version: "4"
+commit_hash: 030d127
+uncommitted_changes: false
+jobs:
+- name: kafka-firehose-nozzle
+  version: ccce0b14c4a7f96a3ea4840c41d4c71a9268b242
+  fingerprint: ccce0b14c4a7f96a3ea4840c41d4c71a9268b242
+  sha1: b055492b4c06e0a1120e4eed13d04fb927340c7f
+packages:
+- name: cflogs-utils
+  version: 2af55f5e5467b92caba4ddda2196c19124e39150
+  fingerprint: 2af55f5e5467b92caba4ddda2196c19124e39150
+  sha1: b086d6d3de2076f0ec5f30608afd2150330bf45f
+  dependencies: []
+- name: golang-1.9-linux
+  version: 200a29b129a9078cb156be44c4a792ae24f42900
+  fingerprint: 200a29b129a9078cb156be44c4a792ae24f42900
+  sha1: bacfa6a162fa7085f95df7d43e911404a3644b01
+  dependencies: []
+- name: kafka-firehose-nozzle
+  version: 383b9d3a8bc552e13cb1671d777702078f2e1d72
+  fingerprint: 383b9d3a8bc552e13cb1671d777702078f2e1d72
+  sha1: c1774305366eb81d5680874ccb573bf0f25f10bd
+  dependencies:
+  - golang-1.9-linux
+license:
+  version: 569a481663f95b10cb803539ba61a8c24a881463
+  fingerprint: 569a481663f95b10cb803539ba61a8c24a881463
+  sha1: d9444c4d95b9d40093d6ed25239132196e6de019
